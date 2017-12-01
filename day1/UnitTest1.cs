@@ -30,9 +30,32 @@ namespace day1
 
             Assert.Equal(expectedSum, sum);
         }
-    }
 
-    public class Program
-    {
+        [Theory]
+        [InlineData("1212", 6)]
+        [InlineData("1221", 0)]
+        [InlineData("123425", 4)]
+        [InlineData("123123", 12)]
+        [InlineData("12131415", 4)]
+        public void Test2(string input, int expectedSum)
+        {
+            var sum = 0;
+            var length = input.Length;
+
+            for (var i = 0; i < length; i++)
+            {
+                var previousIndex = (length / 2) + i;
+                if (previousIndex >= length)
+                    previousIndex = previousIndex - length;
+                if (input[i] == input[previousIndex])
+                {
+                    var digit = input[i].ToString();
+
+                    sum += Convert.ToInt16(digit);
+                }
+            }
+
+            Assert.Equal(expectedSum, sum);
+        }
     }
 }
